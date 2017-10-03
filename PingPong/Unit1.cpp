@@ -9,8 +9,8 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
-int x=8;
-int y=8;
+int x=-8;
+int y=-8;
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
@@ -34,6 +34,47 @@ void __fastcall TForm1::Timer_pilkaTimer(TObject *Sender)
 
    //lipa prawej paletki
    if(ball->Left >= paletka2->Left-paletka1->Width)
+   {
    Timer_pilka->Enabled=false;
+   ball->Visible=false;
+   }
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Timer_paletka1goraTimer(TObject *Sender)
+{
+   paletka1->Top -= 10;
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Timer_paletka1dolTimer(TObject *Sender)
+{
+paletka1->Top += 10;
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Timer_paletka2goraTimer(TObject *Sender)
+{
+paletka2->Top -= 10;
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::Timer_paletka2dolTimer(TObject *Sender)
+{
+  paletka2->Top += 10;
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
+      TShiftState Shift)
+{
+if (Key == VK_UP)  Timer_paletka2gora->Enabled=true;
+if (Key == VK_DOWN)  Timer_paletka2dol->Enabled=true;
+if (Key == 0x41)  Timer_paletka1gora->Enabled=true;
+if (Key == 0x5A)  Timer_paletka1dol->Enabled=true;
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
+      TShiftState Shift)
+{
+if (Key == VK_UP)  Timer_paletka2gora->Enabled=false;
+if (Key == VK_DOWN)  Timer_paletka2dol->Enabled=false;
+if (Key == 0x41)  Timer_paletka1gora->Enabled=false;
+if (Key == 0x5A)  Timer_paletka1dol->Enabled=false;
 }
 //---------------------------------------------------------------------------
