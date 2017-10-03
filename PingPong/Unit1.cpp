@@ -42,22 +42,22 @@ void __fastcall TForm1::Timer_pilkaTimer(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Timer_paletka1goraTimer(TObject *Sender)
 {
-   paletka1->Top -= 10;
+if(paletka1->Top>10)   paletka1->Top -= 10;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Timer_paletka1dolTimer(TObject *Sender)
 {
-paletka1->Top += 10;
+if(paletka1->Top+paletka1->Height+10<tlo->Height) paletka1->Top += 10;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Timer_paletka2goraTimer(TObject *Sender)
 {
-paletka2->Top -= 10;
+if(paletka2->Top>10)  paletka2->Top -= 10;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Timer_paletka2dolTimer(TObject *Sender)
 {
-  paletka2->Top += 10;
+if(paletka2->Top+paletka2->Height+10<tlo->Height)  paletka2->Top += 10;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,

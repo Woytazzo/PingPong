@@ -1,10 +1,12 @@
 object Form1: TForm1
-  Left = 202
-  Top = 173
+  Left = 266
+  Top = 240
   Width = 1044
   Height = 540
   Caption = 'Form1'
   Color = clBtnFace
+  UseDockManager = True
+  DockSite = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
