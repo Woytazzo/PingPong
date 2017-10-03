@@ -11,6 +11,8 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnKeyDown = FormKeyDown
+  OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
   object tlo: TShape
@@ -261,7 +263,35 @@ object Form1: TForm1
   object Timer_pilka: TTimer
     Interval = 15
     OnTimer = Timer_pilkaTimer
-    Left = 200
-    Top = 64
+    Left = 472
+    Top = 216
+  end
+  object Timer_paletka1gora: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = Timer_paletka1goraTimer
+    Left = 40
+    Top = 72
+  end
+  object Timer_paletka1dol: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = Timer_paletka1dolTimer
+    Left = 40
+    Top = 352
+  end
+  object Timer_paletka2gora: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = Timer_paletka2goraTimer
+    Left = 960
+    Top = 56
+  end
+  object Timer_paletka2dol: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = Timer_paletka2dolTimer
+    Left = 960
+    Top = 344
   end
 end
