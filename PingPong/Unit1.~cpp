@@ -9,8 +9,8 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
-int x=-8;
-int y=-8;
+int x=8;
+int y=8;
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
@@ -29,15 +29,30 @@ void __fastcall TForm1::Timer_pilkaTimer(TObject *Sender)
    if(ball->Top+ball->Height+5 >= tlo->Height) y=-y;
 
    //lipa lewej paletki
-   if(ball->Left <= paletka1->Left+paletka1->Width)
-   Timer_pilka->Enabled=false;
-
-   //lipa prawej paletki
-   if(ball->Left >= paletka2->Left-paletka1->Width)
+   if(ball->Left <= paletka1->Left+paletka1->Width-30)
    {
    Timer_pilka->Enabled=false;
    ball->Visible=false;
    }
+   //odbicie od lewej paletki
+   //else if(ball->Top>paletka1->Top-ball->Width/2 && ball->Top<paletka1->Top+paletka1->Height
+   //&& ball->Left+ball->Height>paletka1->Left)
+   //{
+   //if(x>0) x=-x;
+   //}
+
+   //lipa prawej paletki
+   if(ball->Left >= paletka2->Left-paletka2->Width+30)
+   {
+   Timer_pilka->Enabled=false;
+   ball->Visible=false;
+   }
+   //odbicie od prawej paletki
+   //else if(ball->Top>paletka2->Top-ball->Width/2 && ball->Top<paletka2->Top+paletka2->Height
+   //&& ball->Left+ball->Height>paletka2->Left)
+  // {
+  // if(x>0) x=-x;
+  // }
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Timer_paletka1goraTimer(TObject *Sender)
