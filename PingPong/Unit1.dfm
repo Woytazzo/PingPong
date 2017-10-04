@@ -27,8 +27,8 @@ object Form1: TForm1
     Brush.Style = bsDiagCross
   end
   object ball: TImage
-    Left = 856
-    Top = 72
+    Left = 400
+    Top = 32
     Width = 30
     Height = 30
     AutoSize = True

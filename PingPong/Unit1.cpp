@@ -29,15 +29,32 @@ void __fastcall TForm1::Timer_pilkaTimer(TObject *Sender)
    if(ball->Top+ball->Height+5 >= tlo->Height) y=-y;
 
    //lipa lewej paletki
-   if(ball->Left <= paletka1->Left+paletka1->Width)
-   Timer_pilka->Enabled=false;
-
-   //lipa prawej paletki
-   if(ball->Left >= paletka2->Left-paletka1->Width)
+   if(ball->Left <= paletka1->Left+paletka1->Width-30)
    {
    Timer_pilka->Enabled=false;
    ball->Visible=false;
    }
+
+   //odbicie od lewej paletki
+   else if(ball->Top>paletka1->Top
+    && ball->Top+ball->Height<paletka1->Top+paletka1->Height
+   && ball->Left<paletka1->Left+paletka1->Width)
+
+    x=-x;
+
+
+   //lipa prawej paletki
+   if(ball->Left >= paletka2->Left-paletka2->Width+30)
+   {
+   Timer_pilka->Enabled=false;
+   ball->Visible=false;
+   }
+   //odbicie od prawej paletki
+   else if(ball->Top>paletka2->Top
+   && ball->Top+ball->Height<paletka2->Top+paletka2->Height
+   && ball->Left+ball->Width>paletka2->Left)
+    x=-x;
+
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Timer_paletka1goraTimer(TObject *Sender)
