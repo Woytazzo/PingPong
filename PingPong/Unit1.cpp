@@ -9,8 +9,37 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
-int x=-8;
-int y=-8;
+int x=-4;
+int y=-4;
+
+int punktyLewy=0;
+int punktyPrawy=0;
+int iloscOdbic=0;
+
+
+bool lewyPunktuje;
+void ekran()
+{
+AnsiString wynikString;
+AnsiString ilOdbic=IntToStr(iloscOdbic);
+Form1->wyswietlaczOdbic->Caption="Ilosc odbic: "+ilOdbic;
+wynikString=IntToStr(punktyLewy)+":"+IntToStr(punktyPrawy);
+Form1->wynik->Caption=wynikString;
+Form1->Timer_pilka->Enabled=false;
+Form1->ball->Visible=false;
+Form1->Button1->Visible=true;
+Form1->Button2->Visible=true;
+Form1->Label1->Visible=true;
+Form1->wyswietlaczOdbic->Visible=true;
+Form1->wynik->Visible=true;
+}
+
+void trafienieWSrodek()
+{
+ ;
+}
+
+
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
@@ -29,32 +58,39 @@ void __fastcall TForm1::Timer_pilkaTimer(TObject *Sender)
    if(ball->Top+ball->Height+5 >= tlo->Height) y=-y;
 
    //lipa lewej paletki
-   if(ball->Left <= paletka1->Left+paletka1->Width-30)
+   if(ball->Left <= paletka1->Left+paletka1->Width-10)
    {
-   Timer_pilka->Enabled=false;
-   ball->Visible=false;
+   Label1->Caption="    PUNKT DLA GRACZA PRAWEGO   ->";
+   punktyPrawy++;
+   ekran();
+   lewyPunktuje=false;
+
    }
 
    //odbicie od lewej paletki
    else if(ball->Top>paletka1->Top
     && ball->Top+ball->Height<paletka1->Top+paletka1->Height
    && ball->Left<paletka1->Left+paletka1->Width)
-
+    {
     x=-x;
-
-
+    iloscOdbic++;
+    }
    //lipa prawej paletki
-   if(ball->Left >= paletka2->Left-paletka2->Width+30)
+   if(ball->Left >= paletka2->Left-paletka2->Width+10)
    {
-   Timer_pilka->Enabled=false;
-   ball->Visible=false;
+   punktyLewy++;
+   Label1->Caption="<-  PUNKT DLA GRACZA LEWEGO      ";
+   lewyPunktuje=true;
+   ekran();
    }
    //odbicie od prawej paletki
    else if(ball->Top>paletka2->Top
    && ball->Top+ball->Height<paletka2->Top+paletka2->Height
    && ball->Left+ball->Width>paletka2->Left)
+   {
     x=-x;
-
+    iloscOdbic++;
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Timer_paletka1goraTimer(TObject *Sender)
@@ -95,3 +131,48 @@ if (Key == 0x41)  Timer_paletka1gora->Enabled=false;
 if (Key == 0x5A)  Timer_paletka1dol->Enabled=false;
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button1Click(TObject *Sender)
+{
+     ball->Left=472;
+     ball->Top=200;
+     ball->Visible=true;
+     x=-4;
+     y=-4;
+     Timer_pilka->Enabled=true;
+     Button1->Visible=false;
+     Button2->Visible=false;
+     iloscOdbic=0;
+     punktyLewy=0;
+     punktyPrawy=0;
+     Label1->Visible=false;
+     wyswietlaczOdbic->Visible=false;
+     wynik->Visible=false;
+
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button2Click(TObject *Sender)
+{
+   ball->Left=472;
+     ball->Top=200;
+     ball->Visible=true;
+     if (lewyPunktuje==true)
+     {x=-4; y=-4; }
+     else
+     {x=4; y=-4;}
+     Timer_pilka->Enabled=true;
+     Button1->Visible=false;
+     Button2->Visible=false;
+     iloscOdbic=0;
+     Label1->Visible=false;
+     wyswietlaczOdbic->Visible=false;
+     wynik->Visible=false;
+}
+//---------------------------------------------------------------------------
+
+
+
+
+

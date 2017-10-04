@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 266
-  Top = 240
+  Left = 340
+  Top = 178
   Width = 1044
-  Height = 540
+  Height = 610
   Caption = 'Form1'
   Color = clBtnFace
   UseDockManager = True
@@ -21,14 +21,14 @@ object Form1: TForm1
     Left = 0
     Top = 0
     Width = 1028
-    Height = 501
+    Height = 571
     Align = alClient
     Brush.Color = clSilver
     Brush.Style = bsDiagCross
   end
   object ball: TImage
-    Left = 400
-    Top = 32
+    Left = 472
+    Top = 200
     Width = 30
     Height = 30
     AutoSize = True
@@ -262,7 +262,91 @@ object Form1: TForm1
       5EF72DB73E58CE338CE0514515FA261FC21E12A14A3469612D18A492F6957449
       596F3BEC6DFDA5895A737E0BFC8FFFD9}
   end
+  object Label1: TLabel
+    Left = 288
+    Top = 104
+    Width = 433
+    Height = 41
+    Alignment = taCenter
+    AutoSize = False
+    Color = clSkyBlue
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Comic Sans MS'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+    Visible = False
+  end
+  object wynik: TLabel
+    Left = 384
+    Top = 192
+    Width = 265
+    Height = 41
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'ddd'
+    Color = clSkyBlue
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Comic Sans MS'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+    Visible = False
+  end
+  object wyswietlaczOdbic: TLabel
+    Left = 400
+    Top = 264
+    Width = 225
+    Height = 41
+    Alignment = taCenter
+    AutoSize = False
+    Color = clSkyBlue
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Comic Sans MS'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+    Visible = False
+  end
+  object Button1: TButton
+    Left = 344
+    Top = 440
+    Width = 345
+    Height = 65
+    Caption = 'Nowa gra'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -31
+    Font.Name = 'Comic Sans MS'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Left = 344
+    Top = 360
+    Width = 345
+    Height = 49
+    Caption = 'Nast'#281'pna runda ->'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clPurple
+    Font.Height = -27
+    Font.Name = 'Times New Roman'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    Visible = False
+    OnClick = Button2Click
+  end
   object Timer_pilka: TTimer
+    Enabled = False
     Interval = 15
     OnTimer = Timer_pilkaTimer
     Left = 472

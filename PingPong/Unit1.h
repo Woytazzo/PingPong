@@ -23,6 +23,11 @@ __published:	// IDE-managed Components
         TTimer *Timer_paletka1dol;
         TTimer *Timer_paletka2gora;
         TTimer *Timer_paletka2dol;
+        TButton *Button1;
+        TButton *Button2;
+        TLabel *Label1;
+        TLabel *wynik;
+        TLabel *wyswietlaczOdbic;
         void __fastcall Timer_pilkaTimer(TObject *Sender);
         void __fastcall Timer_paletka1goraTimer(TObject *Sender);
         void __fastcall Timer_paletka1dolTimer(TObject *Sender);
@@ -32,6 +37,8 @@ __published:	// IDE-managed Components
           TShiftState Shift);
         void __fastcall FormKeyUp(TObject *Sender, WORD &Key,
           TShiftState Shift);
+        void __fastcall Button1Click(TObject *Sender);
+        void __fastcall Button2Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);
