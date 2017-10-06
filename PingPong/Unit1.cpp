@@ -34,10 +34,8 @@ Form1->wyswietlaczOdbic->Visible=true;
 Form1->wynik->Visible=true;
 }
 
-void trafienieWSrodek()
-{
- ;
-}
+
+
 
 
 //---------------------------------------------------------------------------
@@ -58,7 +56,7 @@ void __fastcall TForm1::Timer_pilkaTimer(TObject *Sender)
    if(ball->Top+ball->Height+5 >= tlo->Height) y=-y;
 
    //lipa lewej paletki
-   if(ball->Left <= paletka1->Left+paletka1->Width-10)
+   if(ball->Left+ball->Width <= paletka1->Left-10)
    {
    Label1->Caption="    PUNKT DLA GRACZA PRAWEGO   ->";
    punktyPrawy++;
@@ -66,31 +64,101 @@ void __fastcall TForm1::Timer_pilkaTimer(TObject *Sender)
    lewyPunktuje=false;
 
    }
+   //+ zmiana kierunku
+    else if(ball->Top+ball->Height/2>=paletka1->Top+paletka1->Height/2-10 &&
+   ball->Top+ball->Height/2<=paletka1->Top+paletka1->Height/2+10
+   && ball->Left<=paletka1->Left+paletka1->Width)
+   {
+  if(x>0)x=-x-1;
+  else x=-x+1;
+  }
 
+  //+ zmiana kierunku 2
+   /* else if
+    (
+    ((ball->Top+ball->Height/2>=paletka1->Top &&
+    ball->Top+ball->Height/2<=paletka1->Top+20)
+    ||
+   (ball->Top+ball->Height/2<=paletka1->Top+paletka1->Height &&
+    ball->Top+ball->Height/2>=paletka1->Top+paletka1->Height-20))
+   && ball->Left<=paletka1->Left+paletka1->Width
+   )
+   {
+  if(x>0&&y>0){x=-x+1; y=-y+1; }
+  else if(x>0&&y<0) {x=-x+1; y=-y-1; }
+  else if(x<0&&y>0) {x=-x-1; y=-y+1; }
+  else  {x=-x-1; y=-y-1; }
+  }
+   */
    //odbicie od lewej paletki
-   else if(ball->Top>paletka1->Top
-    && ball->Top+ball->Height<paletka1->Top+paletka1->Height
-   && ball->Left<paletka1->Left+paletka1->Width)
+   else if(ball->Top+ball->Height/2>=paletka1->Top
+   && ball->Top+ball->Height/2<=paletka1->Top+paletka1->Height
+   && ball->Left<=paletka1->Left+paletka1->Width)
     {
-    x=-x;
-    iloscOdbic++;
+
+   x=-x;
+   iloscOdbic++;
+    if(iloscOdbic%10==0&&iloscOdbic>0){
+ if(x>=0)x++;
+ else if(x<0)x--;
     }
+    }
+
+
+
    //lipa prawej paletki
-   if(ball->Left >= paletka2->Left-paletka2->Width+10)
+   if(ball->Left >= paletka2->Left+paletka2->Width+10)
    {
    punktyLewy++;
    Label1->Caption="<-  PUNKT DLA GRACZA LEWEGO      ";
    lewyPunktuje=true;
    ekran();
    }
-   //odbicie od prawej paletki
-   else if(ball->Top>paletka2->Top
-   && ball->Top+ball->Height<paletka2->Top+paletka2->Height
-   && ball->Left+ball->Width>paletka2->Left)
+   //+ zmiana kierunku
+    else if(ball->Top+ball->Height/2>=paletka2->Top+paletka2->Height/2-10 &&
+   ball->Top+ball->Height/2<=paletka2->Top+paletka2->Height/2+10
+   && ball->Left+ball->Width>=paletka2->Left)
    {
-    x=-x;
-    iloscOdbic++;
+  if(x>0)x=-x-1;
+  else x=-x+1;
+  }
+
+  //+ zmiana kierunku 2
+  /*  else if
+    (
+    ((ball->Top+ball->Height/2>=paletka2->Top &&
+    ball->Top+ball->Height/2<=paletka2->Top+20)
+    ||
+   (ball->Top+ball->Height/2<=paletka2->Top+paletka2->Height &&
+    ball->Top+ball->Height/2>=paletka2->Top+paletka2->Height-20))
+   && ball->Left+ball->Width>=paletka2->Left
+   )
+   {
+  if(x>0&&y>0){x=-x+1; y=-y+1; }
+  else if(x>0&&y<0) {x=-x+1; y=-y-1; }
+  else if(x<0&&y>0) {x=-x-1; y=-y+1; }
+  else  {x=-x-1; y=-y-1; }
+  }
+  */
+   //odbicie od prawej paletki
+   else if(ball->Top+ball->Height/2>=paletka2->Top
+  && ball->Top+ball->Height/2<=paletka2->Top+paletka2->Height
+  && ball->Left+ball->Width>=paletka2->Left)
+  {
+
+
+
+      x=-x;
+   iloscOdbic++;
+    if(iloscOdbic%10==0&&iloscOdbic>0){
+ if(x>=0)x++;
+ else if(x<0)x--;
     }
+
+
+
+ }
+
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::Timer_paletka1goraTimer(TObject *Sender)
