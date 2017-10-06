@@ -126,7 +126,7 @@ object Form1: TForm1
   end
   object paletka1: TImage
     Left = 40
-    Top = 152
+    Top = 200
     Width = 20
     Height = 150
     AutoSize = True
@@ -197,7 +197,7 @@ object Form1: TForm1
   end
   object paletka2: TImage
     Left = 968
-    Top = 144
+    Top = 200
     Width = 20
     Height = 150
     AutoSize = True
@@ -269,6 +269,7 @@ object Form1: TForm1
     Height = 41
     Alignment = taCenter
     AutoSize = False
+    Caption = 'Witamy w grze PING PONG !!'
     Color = clSkyBlue
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
@@ -277,7 +278,6 @@ object Form1: TForm1
     Font.Style = []
     ParentColor = False
     ParentFont = False
-    Visible = False
   end
   object wynik: TLabel
     Left = 384
