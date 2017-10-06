@@ -5,5 +5,5 @@
 4. piłka odbija sięod obu paletek.
 5. wprowadzono: dla kogo jest punkt w danym momencie, jaki jest wynik, jaka była ilość odbić i do wyboru następna runda lub nowa gra.
 6. dodatki: przyspieszanie i zmiana kierunku przy uderzeniu w środek, przyspieszenie przy rosnącej ilosci odbic 
-DO ZROBIENIA  ekran powitalny + przemyslec dodatkowe funkcje
+*.DO ZROBIENIA  ekran powitalny + przemyslec dodatkowe funkcje
 BUG: pływająca piłka po paletce
