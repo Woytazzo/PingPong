@@ -84,6 +84,16 @@ void __fastcall TForm1::Timer_ballTimer(TObject *Sender)
         x=-x;
         amountOfHits++;
 
+        //change of direction depends on hitting over or below the center of paddle
+        if
+        (
+                (ball->Top+ball->Height/2>paddle1->Top+paddle1->Height/2 &&
+                y<0) ||
+                (ball->Top+ball->Height/2<paddle1->Top+paddle1->Height/2 &&
+                y>0)
+        )
+        y=-y;
+
         if(amountOfHits%10==0&&amountOfHits>0)
         {
                 if(x>=0)
@@ -112,7 +122,7 @@ void __fastcall TForm1::Timer_ballTimer(TObject *Sender)
         else
         x=-x+1;
    }
-  //right paddle hit
+  //right paddle hits
   else if(ball->Top+ball->Height/2>=paddle2->Top
   && ball->Top+ball->Height/2<=paddle2->Top+paddle2->Height
   && ball->Left+ball->Width>=paddle2->Left)
@@ -121,6 +131,16 @@ void __fastcall TForm1::Timer_ballTimer(TObject *Sender)
         x=-x;
         
         amountOfHits++;
+
+        //change of direction depends on hitting over or below the center of paddle
+        if
+        (
+                (ball->Top+ball->Height/2>paddle2->Top+paddle2->Height/2 &&
+                y<0) ||
+                (ball->Top+ball->Height/2<paddle2->Top+paddle2->Height/2 &&
+                y>0)
+        )
+        y=-y;
 
         if(amountOfHits%10==0&&amountOfHits>0)
         {
