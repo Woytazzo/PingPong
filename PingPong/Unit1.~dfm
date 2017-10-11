@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 340
-  Top = 178
+  Left = 462
+  Top = 144
   Width = 1044
   Height = 610
   Caption = 'Form1'
@@ -13,11 +13,12 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
-  object tlo: TShape
+  object background: TShape
     Left = 0
     Top = 0
     Width = 1028
@@ -124,7 +125,7 @@ object Form1: TForm1
       FFFFFFFFFFFFFFFF0000}
     Transparent = True
   end
-  object paletka1: TImage
+  object paddle1: TImage
     Left = 40
     Top = 200
     Width = 20
@@ -195,7 +196,7 @@ object Form1: TForm1
       57D97FB62FE7BEF27FE11EDFE4F9B233EDDDF6919C6EC670338E828A28AF5E11
       518A8C7647E6389C454C456957ACEF2936DBEEDBBB7A69BF63FFD9}
   end
-  object paletka2: TImage
+  object paddle2: TImage
     Left = 968
     Top = 200
     Width = 20
@@ -279,14 +280,13 @@ object Form1: TForm1
     ParentColor = False
     ParentFont = False
   end
-  object wynik: TLabel
+  object score: TLabel
     Left = 384
     Top = 192
     Width = 265
     Height = 41
     Alignment = taCenter
     AutoSize = False
-    Caption = 'ddd'
     Color = clSkyBlue
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clWindowText
@@ -297,7 +297,7 @@ object Form1: TForm1
     ParentFont = False
     Visible = False
   end
-  object wyswietlaczOdbic: TLabel
+  object hitsViewer: TLabel
     Left = 400
     Top = 264
     Width = 225
@@ -345,38 +345,38 @@ object Form1: TForm1
     Visible = False
     OnClick = Button2Click
   end
-  object Timer_pilka: TTimer
+  object Timer_ball: TTimer
     Enabled = False
     Interval = 15
-    OnTimer = Timer_pilkaTimer
+    OnTimer = Timer_ballTimer
     Left = 472
     Top = 216
   end
-  object Timer_paletka1gora: TTimer
+  object Timer_paddle1up: TTimer
     Enabled = False
     Interval = 20
-    OnTimer = Timer_paletka1goraTimer
+    OnTimer = Timer_paddle1upTimer
     Left = 40
     Top = 72
   end
-  object Timer_paletka1dol: TTimer
+  object Timer_paddle1down: TTimer
     Enabled = False
     Interval = 20
-    OnTimer = Timer_paletka1dolTimer
+    OnTimer = Timer_paddle1downTimer
     Left = 40
     Top = 352
   end
-  object Timer_paletka2gora: TTimer
+  object Timer_paddle2up: TTimer
     Enabled = False
     Interval = 20
-    OnTimer = Timer_paletka2goraTimer
+    OnTimer = Timer_paddle2upTimer
     Left = 960
     Top = 56
   end
-  object Timer_paletka2dol: TTimer
+  object Timer_paddle2down: TTimer
     Enabled = False
     Interval = 20
-    OnTimer = Timer_paletka2dolTimer
+    OnTimer = Timer_paddle2downTimer
     Left = 960
     Top = 344
   end

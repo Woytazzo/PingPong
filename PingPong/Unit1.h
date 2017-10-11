@@ -14,31 +14,32 @@
 class TForm1 : public TForm
 {
 __published:	// IDE-managed Components
-        TShape *tlo;
+        TShape *background;
         TImage *ball;
-        TImage *paletka1;
-        TTimer *Timer_pilka;
-        TImage *paletka2;
-        TTimer *Timer_paletka1gora;
-        TTimer *Timer_paletka1dol;
-        TTimer *Timer_paletka2gora;
-        TTimer *Timer_paletka2dol;
+        TImage *paddle1;
+        TTimer *Timer_ball;
+        TImage *paddle2;
+        TTimer *Timer_paddle1up;
+        TTimer *Timer_paddle1down;
+        TTimer *Timer_paddle2up;
+        TTimer *Timer_paddle2down;
         TButton *Button1;
         TButton *Button2;
         TLabel *Label1;
-        TLabel *wynik;
-        TLabel *wyswietlaczOdbic;
-        void __fastcall Timer_pilkaTimer(TObject *Sender);
-        void __fastcall Timer_paletka1goraTimer(TObject *Sender);
-        void __fastcall Timer_paletka1dolTimer(TObject *Sender);
-        void __fastcall Timer_paletka2goraTimer(TObject *Sender);
-        void __fastcall Timer_paletka2dolTimer(TObject *Sender);
+        TLabel *score;
+        TLabel *hitsViewer;
+        void __fastcall Timer_ballTimer(TObject *Sender);
+        void __fastcall Timer_paddle1upTimer(TObject *Sender);
+        void __fastcall Timer_paddle1downTimer(TObject *Sender);
+        void __fastcall Timer_paddle2upTimer(TObject *Sender);
+        void __fastcall Timer_paddle2downTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
         void __fastcall FormKeyUp(TObject *Sender, WORD &Key,
           TShiftState Shift);
         void __fastcall Button1Click(TObject *Sender);
         void __fastcall Button2Click(TObject *Sender);
+        void __fastcall FormCreate(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);
