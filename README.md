@@ -7,3 +7,4 @@
 6. dodatki: przyspieszanie i zmiana kierunku przy uderzeniu w środek, przyspieszenie przy rosnącej ilosci odbic 
 7. ekran powitalny i naprawa pływającej piłki po paletce
 8. ujednolicenie do języka angielskiego, uporządkowanie kodu, naprawa błędu obliczania ilości odbić.
+9. dodanie opcji ewentualności zmiany kierunku w osi y w momencie uderzenia w górną lub dolną część paletki.
