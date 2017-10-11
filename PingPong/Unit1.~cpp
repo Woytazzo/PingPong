@@ -12,188 +12,170 @@ TForm1 *Form1;
 int x=-4;
 int y=-4;
 
-int punktyLewy=0;
-int punktyPrawy=0;
-int iloscOdbic=0;
+int pointsLeft=0;
+int pointsRight=0;
+int amountOfHits=0;
 
+bool leftScores;
 
-bool lewyPunktuje;
-void ekran()
+void restart()
 {
-AnsiString wynikString;
-AnsiString ilOdbic=IntToStr(iloscOdbic);
-Form1->wyswietlaczOdbic->Caption="Ilosc odbic: "+ilOdbic;
-wynikString=IntToStr(punktyLewy)+":"+IntToStr(punktyPrawy);
-Form1->wynik->Caption=wynikString;
-Form1->Timer_pilka->Enabled=false;
+
+AnsiString scoreString;
+AnsiString amountOfHitsString=IntToStr(amountOfHits);
+Form1->hitsViewer->Caption="Ilosc odbic: "+amountOfHitsString;
+scoreString=IntToStr(pointsLeft)+":"+IntToStr(pointsRight);
+Form1->score->Caption=scoreString;
+Form1->Timer_ball->Enabled=false;
 Form1->ball->Visible=false;
 Form1->Button1->Visible=true;
 Form1->Button2->Visible=true;
 Form1->Label1->Visible=true;
-Form1->wyswietlaczOdbic->Visible=true;
-Form1->wynik->Visible=true;
+Form1->hitsViewer->Visible=true;
+Form1->score->Visible=true;
+amountOfHits=0;
+
 }
-
-
-
-
-
 //---------------------------------------------------------------------------
+
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
 {
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::Timer_pilkaTimer(TObject *Sender)
+void __fastcall TForm1::Timer_ballTimer(TObject *Sender)
 {
    ball->Left+=x;
    ball->Top+=y;
 
-   //od gornej sciany
-   if(ball->Top-5 <= tlo->Top) y=-y;
-   //od dolnej sciany
-   if(ball->Top+ball->Height+5 >= tlo->Height) y=-y;
+   //top bounce
+   if(ball->Top-5 <= background->Top) y=-y;
+   //bottom bounce
+   if(ball->Top+ball->Height+5 >= background->Height) y=-y;
 
-   //lipa lewej paletki
-   if(ball->Left+ball->Width <= paletka1->Left-10)
+   //left paddle fail
+   if(ball->Left+ball->Width <= paddle1->Left-10)
    {
-   Label1->Caption="    PUNKT DLA GRACZA PRAWEGO   ->";
-   punktyPrawy++;
-   ekran();
-   lewyPunktuje=false;
-
+        Label1->Caption="    PUNKT DLA GRACZA PRAWEGO   ->";
+        pointsRight++;
+        restart();
+        leftScores=false;
    }
-   //+ zmiana kierunku
-    else if(ball->Top+ball->Height/2>=paletka1->Top+paletka1->Height/2-10 &&
-   ball->Top+ball->Height/2<=paletka1->Top+paletka1->Height/2+10
-   && ball->Left<=paletka1->Left+paletka1->Width)
+   // direction change
+    else if
+    (ball->Top+ball->Height/2>=paddle1->Top+paddle1->Height/2-10 &&
+    ball->Top+ball->Height/2<=paddle1->Top+paddle1->Height/2+10 &&
+    ball->Left<=paddle1->Left+paddle1->Width)
    {
-  if(x>0)x=-x-1;
-  else x=-x+1;
-  }
+        if(x>0)
+        x=-x-1;
 
-  //+ zmiana kierunku 2
-   /* else if
-    (
-    ((ball->Top+ball->Height/2>=paletka1->Top &&
-    ball->Top+ball->Height/2<=paletka1->Top+20)
-    ||
-   (ball->Top+ball->Height/2<=paletka1->Top+paletka1->Height &&
-    ball->Top+ball->Height/2>=paletka1->Top+paletka1->Height-20))
-   && ball->Left<=paletka1->Left+paletka1->Width
-   )
-   {
-  if(x>0&&y>0){x=-x+1; y=-y+1; }
-  else if(x>0&&y<0) {x=-x+1; y=-y-1; }
-  else if(x<0&&y>0) {x=-x-1; y=-y+1; }
-  else  {x=-x-1; y=-y-1; }
+        else
+        x=-x+1;
   }
-   */
-   //odbicie od lewej paletki
-   else if(ball->Top+ball->Height/2>=paletka1->Top
-   && ball->Top+ball->Height/2<=paletka1->Top+paletka1->Height
-   && ball->Left<=paletka1->Left+paletka1->Width)
+   //left paddle hits
+   else if
+   (ball->Top+ball->Height/2>=paddle1->Top &&
+   ball->Top+ball->Height/2<=paddle1->Top+paddle1->Height &&
+   ball->Left<=paddle1->Left+paddle1->Width)
     {
+        if(x<0)
+        x=-x;
+        amountOfHits++;
 
-   x=-x;
-   iloscOdbic++;
+        if(amountOfHits%10==0&&amountOfHits>0)
+        {
+                if(x>=0)
+                x++;
 
+                else if(x<0)
+                x--;
+        }
     }
-
-
-
-   //lipa prawej paletki
-   if(ball->Left >= paletka2->Left+paletka2->Width+10)
+   //right paddle fail
+   if(ball->Left >= paddle2->Left+paddle2->Width+10)
    {
-   punktyLewy++;
-   Label1->Caption="<-  PUNKT DLA GRACZA LEWEGO      ";
-   lewyPunktuje=true;
-   ekran();
+        pointsLeft++;
+        Label1->Caption="<-  PUNKT DLA GRACZA LEWEGO      ";
+        leftScores=true;
+        restart();
    }
-   //+ zmiana kierunku
-    else if(ball->Top+ball->Height/2>=paletka2->Top+paletka2->Height/2-10 &&
-   ball->Top+ball->Height/2<=paletka2->Top+paletka2->Height/2+10
-   && ball->Left+ball->Width>=paletka2->Left)
+   // direction change
+   else if(ball->Top+ball->Height/2>=paddle2->Top+paddle2->Height/2-10 &&
+   ball->Top+ball->Height/2<=paddle2->Top+paddle2->Height/2+10 &&
+   ball->Left+ball->Width>=paddle2->Left)
    {
-  if(x>0)x=-x-1;
-  else x=-x+1;
-  }
+        if(x>0)
+        x=-x-1;
 
-  //+ zmiana kierunku 2
-  /*  else if
-    (
-    ((ball->Top+ball->Height/2>=paletka2->Top &&
-    ball->Top+ball->Height/2<=paletka2->Top+20)
-    ||
-   (ball->Top+ball->Height/2<=paletka2->Top+paletka2->Height &&
-    ball->Top+ball->Height/2>=paletka2->Top+paletka2->Height-20))
-   && ball->Left+ball->Width>=paletka2->Left
-   )
-   {
-  if(x>0&&y>0){x=-x+1; y=-y+1; }
-  else if(x>0&&y<0) {x=-x+1; y=-y-1; }
-  else if(x<0&&y>0) {x=-x-1; y=-y+1; }
-  else  {x=-x-1; y=-y-1; }
-  }
-  */
-   //odbicie od prawej paletki
-   else if(ball->Top+ball->Height/2>=paletka2->Top
-  && ball->Top+ball->Height/2<=paletka2->Top+paletka2->Height
-  && ball->Left+ball->Width>=paletka2->Left)
+        else
+        x=-x+1;
+   }
+  //right paddle hit
+  else if(ball->Top+ball->Height/2>=paddle2->Top
+  && ball->Top+ball->Height/2<=paddle2->Top+paddle2->Height
+  && ball->Left+ball->Width>=paddle2->Left)
   {
+        if(x>0)
+        x=-x;
+        
+        amountOfHits++;
 
-
-
-      x=-x;
-   iloscOdbic++;
-
-    }
-
-
- if(iloscOdbic%10==0&&iloscOdbic>0){
- if(x>=0)x++;
- else if(x<0)x--;
- }
-
+        if(amountOfHits%10==0&&amountOfHits>0)
+        {
+        if(x>=0)
+        x++;
+        else if(x<0)
+        x--;
+        }
+  }
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm1::Timer_paletka1goraTimer(TObject *Sender)
+
+void __fastcall TForm1::Timer_paddle1upTimer(TObject *Sender)
 {
-if(paletka1->Top>10)   paletka1->Top -= 10;
+        if(paddle1->Top>10)   paddle1->Top -= 10;
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm1::Timer_paletka1dolTimer(TObject *Sender)
+
+void __fastcall TForm1::Timer_paddle1downTimer(TObject *Sender)
 {
-if(paletka1->Top+paletka1->Height+10<tlo->Height) paletka1->Top += 10;
+        if(paddle1->Top+paddle1->Height+10<background->Height) paddle1->Top += 10;
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm1::Timer_paletka2goraTimer(TObject *Sender)
+
+void __fastcall TForm1::Timer_paddle2upTimer(TObject *Sender)
 {
-if(paletka2->Top>10)  paletka2->Top -= 10;
+        if(paddle2->Top>10)
+        paddle2->Top -= 10;
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm1::Timer_paletka2dolTimer(TObject *Sender)
+
+void __fastcall TForm1::Timer_paddle2downTimer(TObject *Sender)
 {
-if(paletka2->Top+paletka2->Height+10<tlo->Height)  paletka2->Top += 10;
+        if(paddle2->Top+paddle2->Height+10<background->Height)
+        paddle2->Top += 10;
 }
 //---------------------------------------------------------------------------
+
 void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
       TShiftState Shift)
 {
-if (Key == VK_UP)  Timer_paletka2gora->Enabled=true;
-if (Key == VK_DOWN)  Timer_paletka2dol->Enabled=true;
-if (Key == 0x41)  Timer_paletka1gora->Enabled=true;
-if (Key == 0x5A)  Timer_paletka1dol->Enabled=true;
+if (Key == VK_UP)       Timer_paddle2up->Enabled=true;
+if (Key == VK_DOWN)     Timer_paddle2down->Enabled=true;
+if (Key == 0x41)        Timer_paddle1up->Enabled=true;
+if (Key == 0x5A)        Timer_paddle1down->Enabled=true;
 }
 //---------------------------------------------------------------------------
+
 void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
       TShiftState Shift)
 {
-if (Key == VK_UP)  Timer_paletka2gora->Enabled=false;
-if (Key == VK_DOWN)  Timer_paletka2dol->Enabled=false;
-if (Key == 0x41)  Timer_paletka1gora->Enabled=false;
-if (Key == 0x5A)  Timer_paletka1dol->Enabled=false;
+if (Key == VK_UP)       Timer_paddle2up->Enabled=false;
+if (Key == VK_DOWN)     Timer_paddle2down->Enabled=false;
+if (Key == 0x41)        Timer_paddle1up->Enabled=false;
+if (Key == 0x5A)        Timer_paddle1down->Enabled=false;
 }
 //---------------------------------------------------------------------------
 
@@ -204,40 +186,53 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
      ball->Visible=true;
      x=-4;
      y=-4;
-     Timer_pilka->Enabled=true;
+     Timer_ball->Enabled=true;
      Button1->Visible=false;
      Button2->Visible=false;
-     iloscOdbic=0;
-     punktyLewy=0;
-     punktyPrawy=0;
+     amountOfHits=0;
+     pointsLeft=0;
+     pointsRight=0;
      Label1->Visible=false;
-     wyswietlaczOdbic->Visible=false;
-     wynik->Visible=false;
-
-
+     hitsViewer->Visible=false;
+     score->Visible=false;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::Button2Click(TObject *Sender)
 {
-   ball->Left=472;
-     ball->Top=200;
-     ball->Visible=true;
-     if (lewyPunktuje==true)
-     {x=-4; y=-4; }
-     else
-     {x=4; y=-4;}
-     Timer_pilka->Enabled=true;
-     Button1->Visible=false;
-     Button2->Visible=false;
-     iloscOdbic=0;
-     Label1->Visible=false;
-     wyswietlaczOdbic->Visible=false;
-     wynik->Visible=false;
+    ball->Left=472;
+    ball->Top=200;
+    ball->Visible=true;
+
+    if (leftScores==true)
+    {x=-4; y=-4; }
+
+    else
+    {x=4; y=-4;}
+    
+    Timer_ball->Enabled=true;
+    Button1->Visible=false;
+    Button2->Visible=false;
+    amountOfHits=0;
+    Label1->Visible=false;
+    hitsViewer->Visible=false;
+    score->Visible=false;
 }
 //---------------------------------------------------------------------------
 
-
-
-
+void __fastcall TForm1::FormCreate(TObject *Sender)
+{
+    Application->MessageBox("Witaj w grze Ping Pong.\n"
+    "  \n"
+    "Lewy gracz steruje wciskaj¹c klawisze A oraz Z.\n"
+    "Prawy gracz steruje wciskaj¹c srza³ki w górêi w dó³.\n"
+    " \n"
+    "Dla urozmaicenia zabawy:\n"
+    "Kiedy odbijesz pi³kê na œrodku paletki, zmienisz jej k¹t odbicia i prêdkoœæ.\n"
+    "Im d³u¿ej trwa gra, tym szybciej pi³ka siê przemieszcza.  \n"
+    "Mo¿esz zmieniaæ dowolnie pole gry.\n"
+    " \n"
+    "Powodzenia!", "PingPong", MB_OK);
+}
+//---------------------------------------------------------------------------
 
